@@ -14,6 +14,21 @@ count verses by chapter:
 
 extract passage-text from a chapter:
 cat jonah_3.json | jq  -c '.|.passage' | awk '{ print substr( $0, 2, length($0)-2 ) }' | tr -d "\\" > jonah_3_passages.json 
+trigrams:
+cd ../word_gram_sentence/
+./ngram.rb ../bible/jonah_3_passages.json 3 > ../bible/jonah_3_trigrams.txt
+
+unigrams:
+cd ../word_gram_sentence/
+./ngram.rb ../bible/jonah_3_passages.json > ../bible/jonah_3_unigrams.txt
+
+run-length encode the unigrams (ignore ending-punctuation):
+./run_length_encode.rb jonah_3_unigrams.txt > jonah_3_rle_unigrams.txt
+./run_length_encode.rb jonah_3_unigrams.txt 1 |json_pp > jonah_3_rle_unigrams.json
+
+
+run-length encode the trigrams (ignore ending-punctuation):
+./run_length_encode.rb jonah_3_trigrams.txt > jonah_3_rle_trigrams.txt
 
 ./word_index.rb jonah_1.json > jonah_1_index.json
 
