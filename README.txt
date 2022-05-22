@@ -21,6 +21,14 @@ cd ../word_gram_sentence/
 unigrams:
 cd ../word_gram_sentence/
 ./ngram.rb ../bible/jonah_3_passages.json > ../bible/jonah_3_unigrams.txt
+grep -v '=>' jonah_3_rle_unigrams.txt # unrepeated
+grep '=>' jonah_3_rle_unigrams.txt > jonah_3_repeated_rle_unigrams.txt
+
+wc -l jonah_3_rle_unigrams.txt
+     132 jonah_3_rle_unigrams.txt # unique words in ch 3
+wc -l jonah_3_unigrams.txt
+     258 jonah_3_unigrams.txt # total words in ch 3
+
 
 run-length encode the unigrams (ignore ending-punctuation):
 ./run_length_encode.rb jonah_3_unigrams.txt > jonah_3_rle_unigrams.txt

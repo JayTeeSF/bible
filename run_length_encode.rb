@@ -29,7 +29,7 @@ class RLE
   def trim_punct(lines=@lines, lowercase=@lowercase)
     if @trim_punct && lines && !lines.empty?
       # any punct followed by a space:
-      @lines = lines.map {|l| lowercase ? l.sub(/[[:punct:]](\s+|$)/,'').downcase : l.sub(/[[:punct:]](\s+|$)/,'') }
+      @lines = lines.map {|l| lowercase ? l.gsub(/[[:punct:]](\s+|$)/,'\1').downcase : l.gsub(/[[:punct:]](\s+|$)/,'\1') }
     end
   end
 
