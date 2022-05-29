@@ -20,7 +20,7 @@ class Ngram
       warn("Missing json_bible_path")
       return false
     end
-    path ||= "index_#{@json_bible_path}"
+    path ||= "index_#{@size}_#{@json_bible_path}"
     File.open(path, "w") { |f| f.puts to_s } && path
   end
 
@@ -124,7 +124,7 @@ if __FILE__ == $PROGRAM_NAME
   if ARGV.size < 2
     warn("Resorting to default size of ngrams: #{Ngram::DEFAULT_NUM_NGRAMS}")
   else
-    ngram_size = ARGV[1]
+    ngram_size = ARGV[1].to_i
   end
   ng = Ngram.new(bible_path, size: ngram_size, token_ref_path: token_ref_path)
   if token_ref_path # && File.exist?(token_ref_path)

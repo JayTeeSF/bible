@@ -18,12 +18,28 @@ compare ngrams:
 
 ./bible_ngrams.rb jonah.json
 # grep for all ngrams that are in chapter-3 -- notice the other places they show-up too
-grep '"chapter": 3' index_line_per_verse_nasb.json > index_jonah_3_all.json
+grep '"chapter": 3' index_3_line_per_verse_nasb.json > index_3_jonah_3_all.json
 
 
 # the big one:
 ./bible_ngrams.rb line_per_verse_nasb.json 
-grep '"book": "Jonah", "chapter": 3' index_line_per_verse_nasb.json > index_jonah_3_all.json
+grep '"book": "Jonah", "chapter": 3' index_3_line_per_verse_nasb.json > index_3_jonah_3_all.json
+
+./bible_ngrams.rb line_per_verse_nasb.json 5
+grep '"book": "Jonah", "chapter": 3' index_5_line_per_verse_nasb.json > index_5_jonah_3_all.json
+
+./bible_ngrams.rb line_per_verse_nasb.json 7
+grep '"book": "Jonah", "chapter": 3' index_7_line_per_verse_nasb.json > index_7_jonah_3_all.json
+
+grep "now the word of the lord" index_7_jonah_3_all.json
+
+grep exceedingly index_7_jonah_3_all.json
+
+wc -l index_*_jonah_3_all.json
+   233 index_3_jonah_3_all.json
+   217 index_5_jonah_3_all.json
+   198 index_7_jonah_3_all.json
+
 
 extract passage-text from a chapter:
 cat jonah_3.json | jq  -c '.|.passage' | awk '{ print substr( $0, 2, length($0)-2 ) }' | tr -d "\\" > jonah_3_passages.json 
