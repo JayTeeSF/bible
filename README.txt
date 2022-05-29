@@ -12,6 +12,19 @@ count verses by chapter:
   cat jonah_3.json  | wc -l # 10
   cat jonah_4.json  | wc -l # 11
 
+compare ngrams:
+
+./bible_ngrams.rb jonah_3.json
+
+./bible_ngrams.rb jonah.json
+# grep for all ngrams that are in chapter-3 -- notice the other places they show-up too
+grep '"chapter": 3' index_line_per_verse_nasb.json > index_jonah_3_all.json
+
+
+# the big one:
+./bible_ngrams.rb line_per_verse_nasb.json 
+grep '"book": "Jonah", "chapter": 3' index_line_per_verse_nasb.json > index_jonah_3_all.json
+
 extract passage-text from a chapter:
 cat jonah_3.json | jq  -c '.|.passage' | awk '{ print substr( $0, 2, length($0)-2 ) }' | tr -d "\\" > jonah_3_passages.json 
 trigrams:
