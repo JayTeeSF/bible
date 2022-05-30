@@ -57,8 +57,8 @@ class Ngram
           # #FAIL cuz the same word is used in multiple places!
           # USE an array of sources...
           m[ngram_str] ||= []
-          m[ngram_str] << {sort_order: sort_order}.merge(source)
-          m[ngram_str].sort {|a,b| [a[:book], a[:chapter], a[:verse], a[:sort_order]] <=> [b[:book], b[:chapter], b[:verse], b[:sort_order]]} # slow cuz it happens each loop
+          m[ngram_str] << {"sort_order" => sort_order}.merge(source)
+          m[ngram_str].sort {|a,b| [a["book"], a["chapter"], a["verse"], a["sort_order"]] <=> [b["book"], b["chapter"], b["verse"], b["sort_order"]]} # slow cuz it happens each loop
           m
         } # reduce
         prev_line = line
